@@ -1,9 +1,9 @@
-ssh_key_name: aws_devel
+ssh_key_name: [REPLACE]
 aws_region: us-east-1
 ami_id: ami-9eaa1cf6
 instance_type: t2.micro
-vpc_id: vpc-56e3b633
-subnet_id: subnet-d94a2bae 
-slave_count: 3
+vpc_id: [REPLACE]
+subnet_id: [REPLACE]
+slave_count: 16
 cidr_ip: 10.0.0.0/16
-test_host: "https://google.com"
+test_host: "http://google.com"

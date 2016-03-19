@@ -1,19 +1,22 @@
+#!/usr/bin/python
+
 from locust import HttpLocust, TaskSet, task
-# as per https://urllib3.readthedocs.org/en/latest/security.html#pyopenssl
+from time import gmtime, strftime
 
-import urllib3.contrib.pyopenssl
-urllib3.contrib.pyopenssl.inject_into_urllib3()
+import resource
+resource.setrlimit(resource.RLIMIT_NOFILE, (65536, 65536))
 
-class WebsiteTasks(TaskSet):
+import requests
+requests.packages.urllib3.disable_warnings()
+
+class MyTaskSet(TaskSet):
+
     @task
-    def index(self):
+    def validate(self):
         self.client.get("/")
-        
-    @task
-    def about(self):
-        self.client.get("/about/")
 
-class WebsiteUser(HttpLocust):
-    task_set = WebsiteTasks
-    min_wait = 5000
-    max_wait = 15000
+        
+class MyLocust(HttpLocust):
+    task_set = MyTaskSet
+    min_wait=1000
+    max_wait=8000

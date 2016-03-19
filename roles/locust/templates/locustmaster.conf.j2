@@ -1,5 +1,5 @@
 [program:locustmaster]
-command=/usr/local/bin/locust -f /opt/app/agent.py --master --host={{ test_host }}
+command=/usr/local/bin/locust -f /opt/app/agent.py --master --host={{ test_host }} --web-port=80
 redirect_stderr=true
 stdout_logfile=/var/log/locust_master.log
 stdout_logfile_maxbytes=100MB

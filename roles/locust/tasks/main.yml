@@ -11,6 +11,10 @@
   template: src=locustslave.conf.j2 dest=/etc/supervisor/conf.d/locustslave.conf
   when: master_node == False
 
+- name: "Restart slave supervisord"
+  service: name=supervisor state=restarted
+  when: master_node == False
+
 - name: "Start application"
   supervisorctl: name=locustslave state=started
   when: master_node == False
@@ -19,12 +23,13 @@
   template: src=locustmaster.conf.j2 dest=/etc/supervisor/conf.d/locustmaster.conf
   when: master_node == True
 
+- name: "Restart master supervisord"
+  service: name=supervisor state=restarted
+  when: master_node == True
+
 - name: "Start application"
   supervisorctl: name=locustmaster state=started
   when: master_node == True
-
-- name: "Restart supervisord"
-  service: name=supervisor state=restarted
 
 - name: "Print master address"
   debug: msg="{{ master }}"

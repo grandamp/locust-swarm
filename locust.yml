@@ -10,32 +10,27 @@
       region: "{{aws_region}}"
       rules:
         - proto: tcp
-          type: ssh
           from_port: 22
           to_port: 22
           cidr_ip: 0.0.0.0/0
 
         - proto: tcp
-          type: http
           from_port: 80
           to_port: 80
           cidr_ip: 0.0.0.0/0
         
         - proto: tcp
-          type: http
           from_port: 8089
           to_port: 8089
           cidr_ip: 0.0.0.0/0
 
         - proto: tcp
-          type: Custom TCP Rule
           from_port: 1024
           to_port: 65535
           cidr_ip: "{{ cidr_ip }}"
         
       rules_egress:
         - proto: all
-          type: all
           cidr_ip: 0.0.0.0/0
 
     register: ec2_firewall

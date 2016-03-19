@@ -1,5 +1,7 @@
 # Swarm for Locust.io
 
+This is a clone of https://github.com/gleicon/locust-swarm/
+
 Ansible AWS Provisioning for Locust.io Distributed load testing. There will be one Master VM and a number of slave VMs
 
 ## AWS
